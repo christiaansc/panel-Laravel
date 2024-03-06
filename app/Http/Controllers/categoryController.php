@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CreateCategoryRequest;
+use App\Http\Requests\Category\RequestCategory;
 use App\Models\Category;
+use App\Services\category\CategoryService;
+use Exception;
 use Illuminate\Http\Request;
+
 
 class categoryController extends Controller
 {
+
+    private CategoryService $categoryServices;
+
+    public function __construct(CategoryService $categoryServices)
+    {
+        $this->categoryServices = $categoryServices;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,8 @@ class categoryController extends Controller
      */
     public function index()
     {
-         return view('admin.category.index');
+        $categories = $this->categoryServices->getAllCategories();
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -25,7 +39,6 @@ class categoryController extends Controller
     public function create()
     {
         return view('admin.category.create');
-
     }
 
     /**
@@ -34,9 +47,16 @@ class categoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
-        //
+        $dataValidated = $request->validated();
+
+        if ($dataValidated) {
+            $this->categoryServices->insertCategory($dataValidated);
+            return redirect()->route('category.index');
+        } else {
+            return redirect()->route('category.create')->with('Error al crear la Categoría');
+        }
     }
 
     /**
@@ -58,7 +78,8 @@ class categoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -70,7 +91,6 @@ class categoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
     }
 
     /**
@@ -81,6 +101,7 @@ class categoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $this->categoryServices->deleteCategory($category);
+        return redirect()->route('category.index');
     }
 }

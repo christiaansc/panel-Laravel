@@ -17,6 +17,10 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('description')->nullable();
+            $table->boolean('status')->default(1);
+            $table->boolean('user_created')->nullable();
+            $table->boolean('user_deleted')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
