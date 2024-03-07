@@ -42,9 +42,11 @@
                                         <label class="form-control-label" for="name">Nombre <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" name="name" id="name" class="form-control"
-                                            placeholder="Ingrese nombre de Categoría..."
-                                            value="<?= isset($errores) ? $errores['name'] : (!empty($category_data->category) ? $category_data->category : '') ?>">
-                                        <small id="invalid_name" class="text-danger"></small>
+                                            @error('name') is-invalid @enderror placeholder="Ingrese nombre de Categoría..."
+                                            value="{{ $category->name }}">
+                                        @error('name')
+                                            <small class="text-red">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -52,12 +54,12 @@
                                         <label class="form-control-label" for="status">Estado <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" name="status" id="status">
-                                            <option value="1"
-                                                <?= isset($errores) && $errores['status'] == 1 ? 'selected' : (!empty($category_data) && $category_data->status == 1 ? 'selected' : '') ?>>
-                                                Activo</option>
-                                            <option value="0"
-                                                <?= isset($errores) && $errores['status'] == 0 ? 'selected' : (!empty($category_data) && $category_data->status == 0 ? 'selected' : '') ?>>
-                                                Inactivo</option>
+                                            <option value="1" {{ $category->status == 1 ? 'selected' : '' }}>
+                                                Activo
+                                            </option>
+                                            <option value="0" {{ $category->status == 0 ? 'selected' : '' }}>
+                                                Inactivo
+                                            </option>
                                         </select>
                                         <small id="invalid_status" class="text-danger"></small>
                                     </div>
@@ -66,22 +68,17 @@
                             <div class="form-group">
                                 <label class="form-control-label" for="description">Descripción</label>
                                 <textarea rows="3" name="description" id="description" class="form-control"
-                                    placeholder="Ingrese Descripción de categoría..."><?= isset($errores) ? $errores['description'] : (!empty($category_data->description) ? $category_data->description : '') ?></textarea>
+                                    placeholder="Ingrese Descripción de categoría...">{{ $category->description }}</textarea>
                                 <small id="invalid_description" class="text-danger"></small>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <hr>
-                                    <div class="text-center" id="div_spinner" hidden>
-                                        <button type="button" class="btn btn-principal"><span
-                                                class="spinner-border spinner-border-sm" id="sign_spinner"></span> Cargando
-                                        </button>
-                                    </div>
                                     <div class="text-center" id="div_submit">
                                         <a href="{{ route('category.index') }}" class="btn btn-secondary"><i
                                                 class="fa fa-reply"></i> Volver</a>
                                         <button type="submit" id="btn_submit" class="btn btn-success"><i
-                                                class="fa fa-save"></i> Guardar </button>
+                                                class="fa fa-save"></i> Editar </button>
                                     </div>
                                 </div>
                             </div>

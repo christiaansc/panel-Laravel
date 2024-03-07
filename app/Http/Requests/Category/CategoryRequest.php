@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255',
-            'status' => 'required',
-            'description' => 'max:255'
+            'name' => 'required|max:255|min:3',
+            'status' => 'required|boolean',
+            'description' => 'nullable|max:255'
         ];
     }
 
@@ -35,7 +35,9 @@ class CreateCategoryRequest extends FormRequest
         return [
             'name.required' => 'El campo nombre es requerido.',
             'name.string' => 'The name field must be a string.',
-            'status.required' => 'The name field must be a string.',
+            'name.min' => 'The name field must be a string.',
+            'status.boolean' => 'El campo status debe ser un valor booleano.',
+            'status.required' => 'El campo status es requerido.',
         ];
     }
 }

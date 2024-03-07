@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Category\CreateCategoryRequest;
-use App\Http\Requests\Category\RequestCategory;
+use App\dataTransferObjects\CategoryDto;
 use App\Models\Category;
+
 use App\Services\category\CategoryService;
-use Exception;
-use Illuminate\Http\Request;
+use App\Http\Requests\category\CategoryRequest;
 
 
 class categoryController extends Controller
@@ -47,12 +46,12 @@ class categoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateCategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $dataValidated = $request->validated();
+        // dd($request->method());
 
-        if ($dataValidated) {
-            $this->categoryServices->insertCategory($dataValidated);
+        if ($request->method() === 'POST') {
+            $this->categoryServices->insertCategory(CategoryDto::validatedRequest($request));
             return redirect()->route('category.index');
         } else {
             return redirect()->route('category.create')->with('Error al crear la Categoría');
@@ -89,8 +88,17 @@ class categoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
+
+        $dataValidated = $request->validated();
+
+        if ($dataValidated) {
+            $this->categoryServices->updateCategory($dataValidated, $category);
+            return redirect()->route('category.index');
+        } else {
+            return redirect()->route('category.edit')->with('Error al Editar la Categoría');
+        }
     }
 
     /**
@@ -101,7 +109,13 @@ class categoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $this->categoryServices->deleteCategory($category);
-        return redirect()->route('category.index');
+        $deleted = $this->categoryServices->deleteCategory($category);
+
+        if ($deleted) {
+
+            return redirect()->route('category.index');
+        } else {
+            return redirect()->route('category.index');
+        }
     }
 }

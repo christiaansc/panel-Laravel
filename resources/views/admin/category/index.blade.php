@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $category->id }} </td>
                                 <td>{{ $category->name }}</td>
-                                <td>{{ $category->description }}</td>
+                                <td>{{ $category->description ? $category->description : 'Sin Información'  }}</td>
                                 <td>
                                     @if ($category->status === 1)
                                         <span class="badge bg-success">Activo</span>

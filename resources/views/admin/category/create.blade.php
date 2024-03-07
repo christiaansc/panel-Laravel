@@ -25,9 +25,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="name">Nombre <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="name" id="name" class="form-control"
-                                            @error('name') is-invalid @enderror
-                                            placeholder="Ingrese nombre de Categoría...">
+                                        <input type="text" name="name" id="name" class="form-control"  @error('name') is-invalid @enderror placeholder="Ingrese nombre de Categoría...">
                                         @error('name')
                                             <small class="text-red">{{ $message }}</small>
                                         @enderror

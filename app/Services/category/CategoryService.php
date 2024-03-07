@@ -2,6 +2,7 @@
 
 namespace App\Services\category;
 
+use App\dataTransferObjects\CategoryDto;
 use App\Models\Category;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -16,14 +17,14 @@ class CategoryService
             throw new Exception($e);
         }
     }
-    public function insertCategory($category)
+    public function insertCategory(CategoryDto $dto)
     {
         try {
             $category = [
-                'name' => $category['name'],
-                'description' => $category['description'],
+                'name' => $dto->name,
+                'description' => $dto->description,
                 'user_created' => Auth::user()->id,
-
+                'status' => $dto->status
             ];
             Category::create($category);
         } catch (Exception $e) {
@@ -33,17 +34,24 @@ class CategoryService
 
     public function deleteCategory($category)
     {
-
         try {
-            $categoryDeleted = $category->delete();
+            return $categoryDeleted = $category->delete();
             if ($categoryDeleted) {
                 $category->update([
                     'user_deleted' => Auth::user()->id,
                     'status' => 0
                 ]);
             }
-        } catch (\Throwable $th) {
-            throw $th;
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
+    }
+    public function updateCategory($data, $category)
+    {
+        try {
+            $category->update($data);
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
     }
 }
