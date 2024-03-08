@@ -35,7 +35,7 @@ class CategoryRequest extends FormRequest
         return [
             'name.required' => 'El campo nombre es requerido.',
             'name.string' => 'The name field must be a string.',
-            'name.min' => 'The name field must be a string.',
+            'name.min' => 'El Nombre debe tener mas de 3 carácteres.',
             'status.boolean' => 'El campo status debe ser un valor booleano.',
             'status.required' => 'El campo status es requerido.',
         ];

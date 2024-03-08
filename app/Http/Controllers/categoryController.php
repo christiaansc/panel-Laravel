@@ -48,11 +48,9 @@ class categoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        // dd($request->method());
-
         if ($request->method() === 'POST') {
             $this->categoryServices->insertCategory(CategoryDto::validatedRequest($request));
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('toast_success', 'Category Created Successfully!');;
         } else {
             return redirect()->route('category.create')->with('Error al crear la Categoría');
         }

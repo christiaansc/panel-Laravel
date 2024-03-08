@@ -48,7 +48,7 @@
                             <tr>
                                 <td>{{ $category->id }} </td>
                                 <td>{{ $category->name }}</td>
-                                <td>{{ $category->description ? $category->description : 'Sin Información'  }}</td>
+                                <td>{{ $category->description ? $category->description : 'Sin Información' }}</td>
                                 <td>
                                     @if ($category->status === 1)
                                         <span class="badge bg-success">Activo</span>
@@ -62,7 +62,8 @@
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
-                                        <form action="{{ route('category.destroy', $category)}}" method="POST">
+                                        <form action="{{ route('category.destroy', $category) }}" method="POST"
+                                            id="deletecategory">
                                             @csrf
                                             @method('DELETE')
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
@@ -88,5 +89,10 @@
 @section('js')
     <script>
         new DataTable('#categoryTable');
+    </script>
+    <script>
+
+        toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
+
     </script>
 @stop
