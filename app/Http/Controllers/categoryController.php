@@ -7,7 +7,7 @@ use App\Models\Category;
 
 use App\Services\category\CategoryService;
 use App\Http\Requests\category\CategoryRequest;
-
+use Maatwebsite\Excel\Excel;
 
 class categoryController extends Controller
 {
@@ -64,7 +64,8 @@ class categoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $products = $this->categoryServices->showProductCategory($category);
+        return view('admin.category.show',  compact('products'));
     }
 
     /**
@@ -89,11 +90,9 @@ class categoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
 
-        $dataValidated = $request->validated();
-
-        if ($dataValidated) {
-            $this->categoryServices->updateCategory($dataValidated, $category);
-            return redirect()->route('category.index');
+        if ($request->method() ==='PATCH') {
+            $this->categoryServices->updateCategory(CategoryDto::validatedRequest($request), $category);
+            return redirect()->route('category.index')->with('toast_success', 'La categoría fue editada exitosamente!');
         } else {
             return redirect()->route('category.edit')->with('Error al Editar la Categoría');
         }
@@ -108,12 +107,15 @@ class categoryController extends Controller
     public function destroy(Category $category)
     {
         $deleted = $this->categoryServices->deleteCategory($category);
-
         if ($deleted) {
-
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('toast_success' ,' Category Eliminated Successfully!');
         } else {
-            return redirect()->route('category.index');
+            return redirect()->route('category.index')->with('toast_error' ,' Error al Eliminar la Categoría!');
         }
+    }
+
+    public function export(Category $category){
+        return $this->categoryServices->exportData($category);
+
     }
 }

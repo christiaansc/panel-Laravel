@@ -3,7 +3,19 @@
 @section('title', 'Dashboard - category')
 
 @section('content_header')
-    <h1>Categories create</h1>
+    <section class="content-header">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Creacion de Categorías</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/category">Categoria</a></li>
+                    <li class="breadcrumb-item active">crear</li>
+                </ol>
+            </div>
+        </div>
+    </section>
 @stop
 
 @section('content')
@@ -25,7 +37,7 @@
                                     <div class="form-group">
                                         <label class="form-control-label" for="name">Nombre <span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" name="name" id="name" class="form-control"  @error('name') is-invalid @enderror placeholder="Ingrese nombre de Categoría...">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Ingrese nombre de Categoría...">
                                         @error('name')
                                             <small class="text-red">{{ $message }}</small>
                                         @enderror
@@ -63,7 +75,7 @@
                                         </button>
                                     </div>
                                     <div class="text-center" id="div_submit">
-                                        <a href="<?= isset($btn_volver_url) ? $btn_volver_url : '#' ?>"
+                                        <a href="{{ route('category.index') }}"
                                             class="btn btn-secondary"><i class="fa fa-reply"></i> Volver</a>
                                         <button type="submit" id="btn_submit" class="btn btn-success"><i
                                                 class="fa fa-save"></i> Guardar </button>
@@ -76,20 +88,4 @@
             </div>
         </div>
     </section>
-@stop
-
-@section('js')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            let formulario = document.getElementById('formulario');
-            let errores = {!! json_encode($errors->toArray()) !!};
-
-            if (Object.keys(errores).length > 0) {
-                let primerError = Object.keys(errores)[0];
-                document.getElementById(primerError).focus();
-            }
-
-        });
-    </script>
 @stop

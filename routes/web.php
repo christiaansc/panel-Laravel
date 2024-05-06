@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,12 +20,23 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 Route::group([
-    'middleware'=>'auth'
+    'middleware' => 'auth'
 ], function () {
-    Route::get('/' , [HomeController::class ,'index']);
+    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/event', [HomeController::class, 'show']);
+
 
 
     Route::resource('category', categoryController::class);
+    Route::get('category/export/{category}', [categoryController::class, 'export'])->name('category.export');
+
+    Route::resource('product', ProductController::class);
+
+
+
+    Route::group([
+        'middleware' => ['role:Admin']
+    ], function () {
+        Route::resource('user', UserController::class);
+    });
 });
-
-

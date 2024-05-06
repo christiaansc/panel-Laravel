@@ -25,4 +25,11 @@ class Category extends Model
         'user_created',
         'user_deleted'
     ];
+
+
+
+    public function products()
+    {
+        return $this->hasMany(Product::class , 'categoryId');
+    }
 }

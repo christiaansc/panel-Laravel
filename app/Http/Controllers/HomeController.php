@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $events = Event::all();
+        return view('admin.home' , compact('events'));
+    }
+    public function show()
+    {
+        $events = Event::all();
+        return response()->json($events);
     }
 }

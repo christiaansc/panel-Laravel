@@ -23,7 +23,7 @@
     @yield('adminlte_css_pre')
 
     {{-- Base Stylesheets --}}
-    @if(!config('adminlte.enabled_laravel_mix'))
+    @if (!config('adminlte.enabled_laravel_mix'))
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
 
@@ -31,14 +31,15 @@
         @include('adminlte::plugins', ['type' => 'css'])
 
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     @else
         <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
     @endif
 
     {{-- Livewire Styles --}}
-    @if(config('adminlte.livewire'))
-        @if(app()->version() >= 7)
+    @if (config('adminlte.livewire'))
+        @if (app()->version() >= 7)
             @livewireStyles
         @else
             <livewire:styles />
@@ -49,7 +50,7 @@
     @yield('adminlte_css')
 
     {{-- Favicon --}}
-    @if(config('adminlte.use_ico_only'))
+    @if (config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
     @elseif(config('adminlte.use_full_favicon'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
@@ -65,11 +66,13 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicons/favicon-16x16.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicons/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicons/favicon-96x96.png') }}">
-        <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('favicons/android-icon-192x192.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicons/android-icon-192x192.png') }}">
         <link rel="manifest" href="{{ asset('favicons/manifest.json') }}">
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
+
+
 
 </head>
 
@@ -79,7 +82,7 @@
     @yield('body')
 
     {{-- Base Scripts --}}
-    @if(!config('adminlte.enabled_laravel_mix'))
+    @if (!config('adminlte.enabled_laravel_mix'))
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
@@ -93,8 +96,8 @@
     @endif
 
     {{-- Livewire Script --}}
-    @if(config('adminlte.livewire'))
-        @if(app()->version() >= 7)
+    @if (config('adminlte.livewire'))
+        @if (app()->version() >= 7)
             @livewireScripts
         @else
             <livewire:scripts />
@@ -103,6 +106,36 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+    <script>
+        new DataTable('#dataTable');
+    </script>
+    @if (session('toast_success'))
+        <script>
+            toastr.success("{{ session('toast_success') }}");
+        </script>
+    @elseif(session('toast_error'))
+        <script>
+            toastr.error("{{ session('toast_error') }}");
+        </script>
+    @elseif(session('toast_warning'))
+        <script>
+            toastr.warning("{{ session('toast_warning') }}");
+        </script>
+    @elseif(session('toast_info'))
+        <script>
+            toastr.info("{{ session('toast_info') }}");
+        </script>
+    @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let errores = {!! json_encode($errors->toArray()) !!};
+            if (Object.keys(errores).length > 0) {
+                let primerError = Object.keys(errores)[0];
+                document.getElementById(primerError).focus();
+            }
+        });
+    </script>
+
 
 </body>
 

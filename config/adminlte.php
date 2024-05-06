@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Panel</b>Dashboard',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -236,11 +236,11 @@ return [
             'search' => false,
             'topnav' => true,
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
         [
             'text'        => 'Dashboard',
             'url'         => '/',
@@ -266,7 +266,23 @@ return [
                 [
                     'text' => 'Categorias',
                     'url'  => 'category',
+                    'icon' => 'fas fa-tags',
+
                 ],
+                [
+                    'text' => 'Productos',
+                    'url'  => 'product',
+                    'icon' => 'fas fa-boxes',
+
+                ],
+                [
+                    'text' => 'Usuarios',
+                    'url'  => 'user',
+                    'icon' => 'fas fa-users',
+                    'can' => 'users',
+
+                ],
+
                 // [
                 //     'text'    => 'level_one',
                 //     'url'     => '#',
@@ -297,22 +313,22 @@ return [
                 // ],
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url'        => '#',
+        // ],
     ],
 
     /*
@@ -370,6 +386,16 @@ return [
                 ],
             ],
         ],
+        'FullCalendar' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js',
+                ]
+            ],
+        ],
         'Select2' => [
             'active' => false,
             'files' => [
@@ -402,6 +428,21 @@ return [
                     'type' => 'js',
                     'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
+                ],
+            ],
+        ],
+        'Toastr' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/toastr/toastr.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/toastr/toastr.css',
                 ],
             ],
         ],

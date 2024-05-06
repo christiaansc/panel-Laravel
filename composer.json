@@ -15,7 +15,9 @@
         "jeroennoten/laravel-adminlte": "^3.5",
         "laravel/framework": "^8.60",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.1"
+        "laravel/ui": "^3.1",
+        "maatwebsite/excel": "^3.1",
+        "spatie/laravel-permission": "^6.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

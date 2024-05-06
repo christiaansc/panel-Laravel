@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <table id="categoryTable" class="table datatable responsive" style="width:100%">
+                <table id="dataTable" class="table datatable responsive" style="width:100%">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -47,7 +47,7 @@
                         @foreach ($categories as $category)
                             <tr>
                                 <td>{{ $category->id }} </td>
-                                <td>{{ $category->name }}</td>
+                                <td><a href="{{ route('category.show', $category) }}">{{ $category->name }}</a></td>
                                 <td>{{ $category->description ? $category->description : 'Sin Información' }}</td>
                                 <td>
                                     @if ($category->status === 1)
@@ -70,6 +70,8 @@
                                                 <a class="dropdown-item"
                                                     href="{{ route('category.edit', $category) }}">Editar</a>
                                                 <button class="dropdown-item" type="submit">Eliminar</button>
+                                                <a class="dropdown-item" href="{{route('category.export' , $category)}}">Exportar</a>
+
                                             </div>
                                         </form>
                                     </div>
@@ -88,11 +90,25 @@
 
 @section('js')
     <script>
-        new DataTable('#categoryTable');
-    </script>
-    <script>
+        $(document).ready(function() {
+            $('#deletecategory').submit(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: "Estas seguro?",
+                    text: "No puedes revertir esta operación!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, Eliminar!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit();
+                    }
+                });
 
-        toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
-
+            })
+        });
     </script>
+
 @stop
