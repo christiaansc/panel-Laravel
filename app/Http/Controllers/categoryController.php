@@ -89,7 +89,6 @@ class categoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-
         if ($request->method() ==='PATCH') {
             $this->categoryServices->updateCategory(CategoryDto::validatedRequest($request), $category);
             return redirect()->route('category.index')->with('toast_success', 'La categoría fue editada exitosamente!');

@@ -69,11 +69,6 @@
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <hr>
-                                    <div class="text-center" id="div_spinner" hidden>
-                                        <button type="button" class="btn btn-success"><span
-                                                class="spinner-border spinner-border-sm" id="sign_spinner"></span> Cargando
-                                        </button>
-                                    </div>
                                     <div class="text-center" id="div_submit">
                                         <a href="{{ route('category.index') }}"
                                             class="btn btn-secondary"><i class="fa fa-reply"></i> Volver</a>

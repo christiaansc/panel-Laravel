@@ -24,8 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        return view('admin.home' , compact('events'));
+        return view('admin.home' );
     }
     public function show()
     {

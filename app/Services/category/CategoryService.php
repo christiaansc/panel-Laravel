@@ -14,7 +14,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryService
 {
-    private Exporter $exporter;
 
     public function __construct(Exporter $exporter)
     {
@@ -47,6 +46,8 @@ class CategoryService
     public function deleteCategory($category)
     {
         try {
+            $cantProd = Product::where('categoryId' , $category->id)->count();
+            if ($cantProd > 0) return false;
             $categoryDeleted = $category->delete();
             if ($categoryDeleted) {
                 return  $category->update([

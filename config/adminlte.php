@@ -50,7 +50,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true  ,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
 
@@ -283,34 +283,38 @@ return [
 
                 ],
 
-                // [
-                //     'text'    => 'level_one',
-                //     'url'     => '#',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'level_two',
-                //             'url'  => '#',
-                //         ],
-                //         [
-                //             'text'    => 'level_two',
-                //             'url'     => '#',
-                //             'submenu' => [
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //             ],
-                //         ],
-                //     ],
-                // ],
+
                 // [
                 //     'text' => 'level_one',
                 //     'url'  => '#',
                 // ],
+            ],
+
+        ],
+
+        [
+            'text'    => 'Adm. Ventas',
+            'url'     => '#',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'level_two',
+                    'url'  => '#',
+                ],
+                [
+                    'text'    => 'level_two',
+                    'url'     => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_three',
+                            'url'  => '#',
+                        ],
+                        [
+                            'text' => 'level_three',
+                            'url'  => '#',
+                        ],
+                    ],
+                ],
             ],
         ],
         // ['header' => 'labels'],
@@ -330,6 +334,7 @@ return [
         //     'url'        => '#',
         // ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

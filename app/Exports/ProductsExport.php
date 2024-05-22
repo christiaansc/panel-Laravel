@@ -10,6 +10,6 @@ class ProductsExport implements FromCollection
 {
     public function collection()
     {
-        return Product::all();
+        $product =  Product::get();
     }
 }

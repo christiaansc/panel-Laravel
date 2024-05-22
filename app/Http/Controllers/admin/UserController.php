@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\user\UserRequest;
 use App\Models\User;
-use Error;
 
 class UserController extends Controller
 {

@@ -39,6 +39,7 @@
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Cant. Productos</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -49,6 +50,7 @@
                                 <td>{{ $category->id }} </td>
                                 <td><a href="{{ route('category.show', $category) }}">{{ $category->name }}</a></td>
                                 <td>{{ $category->description ? $category->description : 'Sin Información' }}</td>
+                                <td>{{ $category->products->count() }}</td>
                                 <td>
                                     @if ($category->status === 1)
                                         <span class="badge bg-success">Activo</span>
@@ -71,7 +73,6 @@
                                                     href="{{ route('category.edit', $category) }}">Editar</a>
                                                 <button class="dropdown-item" type="submit">Eliminar</button>
                                                 <a class="dropdown-item" href="{{route('category.export' , $category)}}">Exportar</a>
-
                                             </div>
                                         </form>
                                     </div>

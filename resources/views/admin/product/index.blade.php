@@ -40,6 +40,7 @@
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Estado</th>
+                                <th>Categoría</th>
                                 <th>Acciones</th>
 
                             </tr>
@@ -58,6 +59,9 @@
                                             <span class="badge bg-danger">Desactivado</span>
                                         @endif
                                     </td>
+                                    <td>
+                                        {{ $product->category->name }}
+                                    </td>
                                     <td class="text-center">
                                         <div class="dropdown">
                                             <a class="btn btn-sm btn-principal" href="#" role="button"
@@ -70,7 +74,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     <a class="dropdown-item" href="{{ route('product.edit', $product) }}">Editar</a>
                                                     <button class="dropdown-item" type="submit">Eliminar</button>
-                                                    <a href="{{route('product.export')}}">Exportar</a>
+                                                    <a class="dropdown-item" href="{{route('product.index')}}">Exportar</a>
                                                 </div>
                                             </form>
                                         </div>
