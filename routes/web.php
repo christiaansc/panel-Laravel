@@ -32,6 +32,8 @@ Route::group([
 
     Route::resource('product', ProductController::class);
 
+    Route::get('products-by-category/{categoryId}', [ProductController::class, 'productsByCategory'])->name('products-by-category');
+
 
 
     Route::group([

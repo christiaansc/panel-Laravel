@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Services\product\ProductService;
 use Illuminate\Http\Request;
@@ -35,7 +36,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Category::where('status',1)
+                                    ->has('products')
+                                    ->get();
+         return view('admin.product.create' , compact('categorias'));
     }
 
     /**
@@ -92,5 +96,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function productsByCategory($id){
+
+        $products = $this->productService->getProductsByCategory($id);
+        return response()->json($products);
+
     }
 }
